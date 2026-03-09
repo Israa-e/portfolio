@@ -329,7 +329,7 @@
             position: relative;
             min-height: 100vh;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr 420px;
             align-items: center;
             padding: 120px 56px 80px;
             z-index: 1;
@@ -367,7 +367,7 @@
 
         h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(60px, 7vw, 100px);
+            font-size: clamp(40px, 5vw, 92px);
             font-weight: 300;
             line-height: 1.0;
             letter-spacing: -0.03em;
@@ -454,7 +454,7 @@
             align-items: center;
             gap: 8px;
             background: var(--accent);
-            color: #06080f;
+            color: #ffffff;
             font-family: 'Outfit', sans-serif;
             font-weight: 700;
             font-size: 12px;
@@ -506,6 +506,7 @@
             border-radius: 4px;
             overflow: hidden;
             animation: fadeUp .9s .5s ease both;
+            max-width: 540px;
         }
 
         .stat-cell {
@@ -551,7 +552,7 @@
         .profile-frame {
             position: relative;
             width: 100%;
-            max-width: 400px;
+            max-width: 360px;
         }
 
         .profile-card {
@@ -862,6 +863,24 @@
             border-radius: 3px;
             font-family: 'Outfit', sans-serif;
             font-weight: 500;
+        }
+
+        .badge-outline-accent {
+            background: var(--accent-dim);
+            border: 1px solid rgba(91, 141, 238, 0.3);
+            color: var(--accent);
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            transition: all .2s;
+            cursor: pointer;
+        }
+
+        .badge-outline-accent:hover {
+            background: rgba(91, 141, 238, 0.2);
+            border-color: var(--accent);
+            transform: translateY(-1px);
         }
 
         .project-link {
@@ -1315,6 +1334,42 @@
             font-weight: 600;
             color: white;
             line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+        .cert-view {
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            font-family: 'Outfit', sans-serif;
+            transition: color .2s;
+        }
+
+        .cert-card:hover .cert-view {
+            color: var(--accent);
+        }
+
+        .cert-preview {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            margin-left: auto;
+            transition: border-color .25s, transform .25s;
+            flex-shrink: 0;
+        }
+
+        .cert-card:hover .cert-preview {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            .cert-preview {
+                display: none;
+            }
         }
 
         /* ── FOOTER ── */
@@ -1421,15 +1476,30 @@
             transform: translateY(0);
         }
 
-        /* ── MOBILE ── */
-        @media (max-width: 1024px) {
+        /* ── MOBILE & STACKING ── */
+        @media (max-width: 1250px) {
             .hero {
                 grid-template-columns: 1fr;
                 gap: 60px;
+                text-align: center;
+                padding-top: 140px;
+                max-width: 800px;
+                margin: 0 auto;
             }
 
             .hero-right {
                 display: none;
+            }
+
+            .hero-eyebrow,
+            .hero-role,
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-summary {
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .projects-grid {
@@ -1448,6 +1518,7 @@
                 grid-template-columns: 1fr;
             }
         }
+
 
         @media (max-width: 768px) {
             body {
@@ -1522,6 +1593,8 @@
         <a href="#skills" onclick="closeMenu()">Skills</a>
         <a href="#education" onclick="closeMenu()">Education</a>
         <a href="#certificates" onclick="closeMenu()">Certificates</a>
+        <a href="https://drive.google.com/file/d/1jYd8lAKiPLeyh2r88ery6_WdWI2kAozl/view?usp=sharing" target="_blank"
+            onclick="closeMenu()" style="color:var(--accent)">&#11015; Download CV</a>
     </div>
 
     <!-- NAV -->
@@ -1536,7 +1609,8 @@
             <li><a href="#skills">Skills</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#certificates">Certificates</a></li>
-            <li><a href="mailto:israa00elhalby@gmail.com" class="nav-cta">Hire Me</a></li>
+            <li><a href="https://drive.google.com/file/d/1jYd8lAKiPLeyh2r88ery6_WdWI2kAozl/view?usp=sharing"
+                    target="_blank" rel="noopener" class="nav-cta">⬇ CV</a></li>
         </ul>
         <button class="hamburger" id="ham" onclick="toggleMenu()">
             <span></span><span></span><span></span>
@@ -1569,8 +1643,9 @@
             </p>
 
             <div class="hero-actions">
-                <a href="mailto:israa00elhalby@gmail.com" class="btn-primary">Get in Touch ↗</a>
-                <a href="https://github.com/Israa-e" target="_blank" class="btn-outline">GitHub Profile</a>
+                <a href="https://drive.google.com/file/d/1jYd8lAKiPLeyh2r88ery6_WdWI2kAozl/view?usp=sharing"
+                    target="_blank" rel="noopener" class="btn-primary">⬇ Download CV</a>
+                <a href="mailto:israa00elhalby@gmail.com" class="btn-outline">Get in Touch ↗</a>
             </div>
 
             <div class="hero-stats">
@@ -1631,6 +1706,13 @@
                             <div class="contact-icon">◎</div>
                             Gaza Strip, Palestine
                         </span>
+                        <a href="https://drive.google.com/file/d/1jYd8lAKiPLeyh2r88ery6_WdWI2kAozl/view?usp=sharing"
+                            target="_blank" rel="noopener" class="profile-contact-row"
+                            style="margin-top:4px;border-top:1px solid var(--border);padding-top:14px">
+                            <div class="contact-icon"
+                                style="background:var(--accent-dim);border-color:rgba(91,141,238,.3)">⬇</div>
+                            <span style="color:var(--accent);font-weight:600">Download CV</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1893,6 +1975,12 @@
                 <div>
                     <span class="badge badge-blue">GPA: 3.55 / 4.0</span>
                     <span class="badge badge-gold">🎓 50% Merit Scholarship</span>
+                    <a href="https://drive.google.com/file/d/18jXO6swchGjAcZBF7w5Z0FZX6sYHH5jf/view?usp=sharing"
+                        target="_blank" class="badge badge-outline-accent"
+                        style="text-decoration:none;display:inline-flex;align-items:center;gap:4px">
+                        <span>📜 View Degree</span>
+                        <span style="font-size:10px;opacity:0.7">↗</span>
+                    </a>
                 </div>
             </div>
             <div class="edu-side">
@@ -1920,34 +2008,50 @@
         </div>
 
         <div class="cert-grid">
-            <div class="cert-card reveal">
+            <a href="https://udemy-certificate.s3.amazonaws.com/image/UC-8c3c6d97-a98d-4315-b7c4-ab320fd1c759.jpg"
+                target="_blank" class="cert-card reveal" style="text-decoration:none">
                 <div class="cert-icon">🌐</div>
                 <div>
                     <div class="cert-platform">Udemy</div>
                     <div class="cert-name">Build Responsive Real World Websites with HTML5 and CSS3</div>
+                    <div class="cert-view">View Certificate ↗</div>
                 </div>
-            </div>
-            <div class="cert-card reveal">
+                <img src="https://udemy-certificate.s3.amazonaws.com/image/UC-8c3c6d97-a98d-4315-b7c4-ab320fd1c759.jpg"
+                    class="cert-preview" alt="HTML5 CSS3 Certificate">
+            </a>
+            <a href="https://udemy-certificate.s3.amazonaws.com/image/UC-338ce4e5-557f-42b3-b12c-b738d8a5bb6e.jpg"
+                target="_blank" class="cert-card reveal" style="text-decoration:none">
                 <div class="cert-icon">📱</div>
                 <div>
                     <div class="cert-platform">Udemy</div>
                     <div class="cert-name">Flutter & Dart – The Complete Guide [2023 Edition]</div>
+                    <div class="cert-view">View Certificate ↗</div>
                 </div>
-            </div>
-            <div class="cert-card reveal">
+                <img src="https://udemy-certificate.s3.amazonaws.com/image/UC-338ce4e5-557f-42b3-b12c-b738d8a5bb6e.jpg"
+                    class="cert-preview" alt="Flutter Dart Certificate">
+            </a>
+            <a href="https://udemy-certificate.s3.amazonaws.com/image/UC-622fc13c-fe4b-42b4-b665-41304910535a.jpg"
+                target="_blank" class="cert-card reveal" style="text-decoration:none">
                 <div class="cert-icon">⚙️</div>
                 <div>
                     <div class="cert-platform">Udemy</div>
                     <div class="cert-name">The PHP 8 Learning Guide</div>
+                    <div class="cert-view">View Certificate ↗</div>
                 </div>
-            </div>
-            <div class="cert-card reveal">
+                <img src="https://udemy-certificate.s3.amazonaws.com/image/UC-622fc13c-fe4b-42b4-b665-41304910535a.jpg"
+                    class="cert-preview" alt="PHP 8 Certificate">
+            </a>
+            <a href="https://udemy-certificate.s3.amazonaws.com/image/UC-8e31f343-beba-45f0-a978-28c71f15d0db.jpg?v=1757151392000"
+                target="_blank" class="cert-card reveal" style="text-decoration:none">
                 <div class="cert-icon">📊</div>
                 <div>
                     <div class="cert-platform">Udemy</div>
                     <div class="cert-name">Python for Data Science and Machine Learning</div>
+                    <div class="cert-view">View Certificate ↗</div>
                 </div>
-            </div>
+                <img src="https://udemy-certificate.s3.amazonaws.com/image/UC-8e31f343-beba-45f0-a978-28c71f15d0db.jpg?v=1757151392000"
+                    class="cert-preview" alt="Python Data Science Certificate">
+            </a>
         </div>
     </div>
 
@@ -1960,6 +2064,8 @@
             <a href="mailto:israa00elhalby@gmail.com">Email</a>
             <a href="https://github.com/Israa-e" target="_blank">GitHub</a>
             <a href="https://linkedin.com/in/israa-elhalaby" target="_blank">LinkedIn</a>
+            <a href="https://drive.google.com/file/d/1jYd8lAKiPLeyh2r88ery6_WdWI2kAozl/view?usp=sharing" target="_blank"
+                style="color:var(--accent)">&#11015; CV</a>
         </div>
         <div class="footer-right">Built with ♥</div>
     </footer>
